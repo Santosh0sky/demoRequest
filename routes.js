@@ -1,9 +1,7 @@
-const http = require('http');
 const fs = require('fs');
-const path = require('path');
 
-const server = http.createServer((req, res) => {
-    if (req.url === '/' && req.method === 'GET') {
+const handler = (req, res) => {
+if (req.url === '/' && req.method === 'GET') {
         // Read existing messages from file
         let messages = [];
         const filePath = path.join(__dirname, 'messages.txt');
@@ -69,8 +67,11 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.end('Page Not Found');
     }
-});
+};
 
-server.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
-});
+const text = "Routing file";
+
+module.exports = {
+  handler,
+  text
+};
